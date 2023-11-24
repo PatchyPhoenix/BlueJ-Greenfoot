@@ -1732,7 +1732,7 @@ public final class Config
     {
         try
         {
-            sheetList.add(new File(bluejLibDir + "/stylesheets", stem + ".css").toURI().toURL().toString());
+            sheetList.add(new File(bluejLibDir + "/stylesheets/"+getPropString("bluej.theme","light"), stem + ".css").toURI().toURL().toString());
         }
         catch (MalformedURLException e)
         {
