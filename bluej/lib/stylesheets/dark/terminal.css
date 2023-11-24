@@ -1,0 +1,48 @@
+/*
+.terminal .virtual-flow {
+    -fx-gravity: rear;
+}
+*/
+.terminal-split {
+    -fx-orientation: vertical;
+}
+.terminal-output {
+    -fx-fill: rgb(204, 202, 202);
+    -fx-background-color: #202020;
+    -fx-cursor: text;
+}
+.terminal-input {
+    -fx-fill: rgb(96, 170, 255);
+}
+.terminal-method-record {
+    -fx-fill: brown;
+}
+.terminal-error {
+    -fx-fill: rgb(253, 69, 69);
+    -fx-background-color: #303030;
+    -fx-cursor: text;
+}
+.terminal-output .flow-selection, .terminal-error .flow-selection {
+    -fx-fill: hsb(211, 50%, 90%);
+    -fx-stroke: null;
+}
+.terminal-stack-link {
+    -fx-fill: rgb(255, 96, 96);
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+.terminal-stack-foreign {
+    -fx-fill: hsb(0, 0%, 70%);
+}
+
+/* Show prompt text even when we are focused: */
+.terminal-input-field {
+    -fx-prompt-text-fill: #f5f5f5;
+    -fx-text-fill: #f0f0f0;
+    -fx-background-color: #303030;
+}
+
+/* Slightly lighter to make input field stand out: */
+.terminal, .terminal-error {
+    -fx-background-color: #303030;
+}

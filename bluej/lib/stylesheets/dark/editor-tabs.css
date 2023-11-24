@@ -1,0 +1,29 @@
+.tabbed-editor > .tab-header-area > .tab-header-background {
+    -fx-background-color: #202020;
+    -fx-text-fill:#CCCACA;
+}
+
+.tabbed-editor > .tab-header-area .tab {
+    -fx-text-fill:#CCCACA;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #252525;
+}
+.tabbed-editor > .tab-header-area .bj-tab-error .tab-label {
+    -fx-border-width : 0 0 2 0;
+    -fx-text-fill:#CCCACA;
+    -fx-border-color: red;
+}
+.tabbed-editor > .tab-header-area .moe-tab:selected {
+    /* Remove border at bottom of tab when selected: */
+    -fx-background-color: #303030 !important;
+    -fx-text-fill:#CCCACA;
+    -fx-border-color: transparent !important;
+}
+.tabbed-editor > .tab-header-area  {
+    -fx-padding: 2 5 -1 5;
+    -fx-text-fill:#CCCACA;
+}
+
+.tabbed-editor .tab-close-button:hover {
+    -fx-background-color: rgb(177, 2, 2);
+}
