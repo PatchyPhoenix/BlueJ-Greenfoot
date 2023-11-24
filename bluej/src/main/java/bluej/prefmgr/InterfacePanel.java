@@ -27,6 +27,7 @@ import java.util.List;
 
 import bluej.pkgmgr.Project;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -34,6 +35,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import bluej.Config;
+import bluej.Theme;
 import bluej.utility.javafx.JavaFXUtil;
 import threadchecker.OnThread;
 import threadchecker.Tag;
@@ -54,6 +56,10 @@ public class InterfacePanel extends VBox
     private CheckBox accessibility;
     
     private CheckBox toggleTestNewsMode;
+
+    private ArrayList<String> allThemes;
+    private ComboBox<Theme> theme;
+    private Node themeSetting;
     
     public InterfacePanel()
     {
@@ -112,7 +118,16 @@ public class InterfacePanel extends VBox
         
         accessibility = new CheckBox(Config.getString("prefmgr.accessibility.support"));
         getChildren().add(PrefMgrDialog.headedVBox("prefmgr.accessibility.title", Arrays.asList(accessibility)));
-        
+
+        allThemes = new ArrayList<String>();
+        allThemes.add("light");
+        allThemes.add("dark");
+        ObservableList<Theme> themePoss = FXCollections.observableArrayList(Theme.light, Theme.dark);
+        theme = new ComboBox<Theme>(themePoss);
+        themeSetting = PrefMgrDialog.labelledItem("Theme", theme);
+        Label t = new Label(Config.getString("You will need to restart BlueJ for the theme setting to take effect."));
+        getChildren().add(PrefMgrDialog.headedVBox("Appearance", Arrays.asList(themeSetting, t)));
+
         // Hide this checkbox so that it is only revealed if you mouse-over while holding shift:
         toggleTestNewsMode = new CheckBox("Switch to testing mode for news display (after restart)");
         toggleTestNewsMode.setOpacity(0);
@@ -134,6 +149,12 @@ public class InterfacePanel extends VBox
             curLangIndex = 0;
         }
         langDropdown.getSelectionModel().select(curLangIndex);
+
+        String currentTheme = Config.getPropString("bluej.theme", "light");
+        int curThemeIndex = allThemes.indexOf(currentTheme);
+        if(curThemeIndex == -1)
+            curThemeIndex = 0;
+        theme.getSelectionModel().select(curThemeIndex);
         
         accessibility.setSelected(PrefMgr.getFlag(PrefMgr.ACCESSIBILITY_SUPPORT));
         
@@ -150,6 +171,8 @@ public class InterfacePanel extends VBox
     {
         Config.putPropString("bluej.language", allLangsInternal.get(langDropdown.getSelectionModel().getSelectedIndex()));
         
+        Config.putPropString("bluej.theme", allThemes.get(theme.getSelectionModel().getSelectedIndex()));
+
         PrefMgr.setFlag(PrefMgr.ACCESSIBILITY_SUPPORT, accessibility.isSelected());
 
         // Only counts as selected if selected and visible:
